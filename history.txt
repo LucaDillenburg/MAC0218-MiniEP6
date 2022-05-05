@@ -1,0 +1,11 @@
+# Build
+docker build -t custom_caddy:1.0 .
+
+# Deploy comum: modificando os arquivos do "pages" eles não serão modificados no servidor.
+docker run -p 80:80 custom_caddy:1.0
+
+# Deploy dinâmico (para desenvolvimento): modificando os arquivos do "pages" eles serão modificados no servidor.
+docker run \
+    -p 80:80 \
+    -v $(pwd)/pages:/usr/src/pages \
+    custom_caddy:1.0
